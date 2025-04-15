@@ -1,11 +1,13 @@
 from flask import Flask, request, send_file, jsonify
 from io import BytesIO
-from yolo import run_yolo  # Modified to accept file-like object and return PIL.Image
+from yolo import run_yolo
 import time
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+
+# ✅ Allow only specific origin (127.0.0.1:5000)
+CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:5000"}})
 
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -17,7 +19,7 @@ def upload():
         return jsonify({"error": "No selected file"}), 400
 
     start_time = time.time()
-    processed_image = run_yolo(file)  # This should return a PIL image
+    processed_image = run_yolo(file)
     end_time = time.time()
 
     img_io = BytesIO()
