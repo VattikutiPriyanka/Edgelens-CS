@@ -4,3 +4,7 @@ torch
 opencv-python
 Pillow
 pandas
+numpy
+matplotlib
+opencv-python
+requests
