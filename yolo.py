@@ -1,17 +1,21 @@
-import torch
+from ultralytics import YOLO
 import cv2
 import numpy as np
 from PIL import Image
 
-model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
+# Load YOLOv8 model (n = nano, s = small, m = medium, l = large, x = extra large)
+model = YOLO('yolov8n.pt')  # You can change to 'yolov8s.pt' or others
 
 def run_yolo(file_storage):
+    # Convert uploaded file to numpy array (OpenCV image)
     image_bytes = np.frombuffer(file_storage.read(), np.uint8)
     image = cv2.imdecode(image_bytes, cv2.IMREAD_COLOR)
 
+    # Run inference
     results = model(image)
-    results.render()
-    output = results.imgs[0]  # NumPy array (BGR)
 
-    output_rgb = cv2.cvtColor(output, cv2.COLOR_BGR2RGB)
-    return Image.fromarray(output_rgb)
+    # Plot bounding boxes on the image (returns a numpy array in RGB format)
+    rendered_img = results[0].plot()  # Already in RGB format
+
+    # Convert numpy array to PIL Image and return
+    return Image.fromarray(rendered_img)
