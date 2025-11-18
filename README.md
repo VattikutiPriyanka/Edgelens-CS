@@ -4,14 +4,14 @@ The system uses a distributed architecture, where lightweight Python clients cap
 
 The project implements:
 
-YOLO-based object detection (customized lightweight model)
+- YOLO-based object detection (customized lightweight model)
 
-Edge offloading of inference for low-power devices
+- Edge offloading of inference for low-power devices
 
-Efficient communication layer between edge ↔ fog ↔ cloud
+- Efficient communication layer between edge ↔ fog ↔ cloud
 
-Performance benchmarking for latency, throughput, and resource usage
+- Performance benchmarking for latency, throughput, and resource usage
 
-Modular components (app.py, yolo.py, benchmark.py) for deployment flexibility
+- Modular components (app.py, yolo.py, benchmark.py) for deployment flexibility
 
 This architecture significantly improves response time and energy efficiency compared to running ML locally on IoT devices. The framework is suitable for applications in smart surveillance, traffic monitoring, industrial IoT, and autonomous systems.
